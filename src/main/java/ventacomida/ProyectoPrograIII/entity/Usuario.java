@@ -1,4 +1,4 @@
-package ventacomida.ProyectoPrograIII.model;
+package ventacomida.ProyectoPrograIII.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

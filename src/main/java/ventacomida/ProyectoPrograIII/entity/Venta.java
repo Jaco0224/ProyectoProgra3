@@ -1,4 +1,4 @@
-package ventacomida.ProyectoPrograIII.model;
+package ventacomida.ProyectoPrograIII.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

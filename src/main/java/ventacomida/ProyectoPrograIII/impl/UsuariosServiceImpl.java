@@ -1,6 +1,6 @@
 package ventacomida.ProyectoPrograIII.impl;
 
-import ventacomida.ProyectoPrograIII.model.Usuario;
+import ventacomida.ProyectoPrograIII.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ventacomida.ProyectoPrograIII.repository.UsuarioRepository;
@@ -8,15 +8,18 @@ import ventacomida.ProyectoPrograIII.services.UsuarioService;
 
 import java.util.List;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
 public class UsuariosServiceImpl implements UsuarioService {
+    
+
     
     @Autowired
     private UsuarioRepository usuarioRepository;
 
     @Autowired
-    private BCryptPasswordEncoder encoder;
+    private PasswordEncoder encoder;
 
 
     @Override
@@ -26,7 +29,8 @@ public class UsuariosServiceImpl implements UsuarioService {
 
     @Override
     public Usuario guardar(Usuario usuario) {
-        return usuarioRepository.save(usuario);
+     usuario.setContraseña(encoder.encode(usuario.getContraseña()));
+    return usuarioRepository.save(usuario);
     }
 
     @Override
@@ -41,12 +45,10 @@ public class UsuariosServiceImpl implements UsuarioService {
     }
     
     
-        //guarda usuario para el login
-        public void guardarUsuario(Usuario usuario) {
-        // encripta la contraseña antes de guardar
-        usuario.setContraseña(encoder.encode(usuario.getContraseña()));
-        usuarioRepository.save(usuario);
-    }
+        
+
+        
+      
     
     
 }

@@ -1,7 +1,7 @@
 package ventacomida.ProyectoPrograIII.controller;
 
 
-import ventacomida.ProyectoPrograIII.model.Usuario;
+import ventacomida.ProyectoPrograIII.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ventacomida.ProyectoPrograIII.services.UsuarioService;
@@ -9,10 +9,10 @@ import ventacomida.ProyectoPrograIII.services.UsuarioService;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 
-@RequestMapping("/api/usuarios")
-@RestController
+/*@RequestMapping("/api/usuarios")
+@RestController*/
 public class UsuarioController {
-
+/*
     @Autowired
     private UsuarioService usuarioService;
 
@@ -34,7 +34,7 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Integer id) {
         usuarioService.eliminar(id);
-    }
+    }*/
     
 
 

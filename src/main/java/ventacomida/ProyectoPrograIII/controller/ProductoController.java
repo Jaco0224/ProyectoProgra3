@@ -1,17 +1,17 @@
 package ventacomida.ProyectoPrograIII.controller;
 
 
-import ventacomida.ProyectoPrograIII.model.Producto;
+import ventacomida.ProyectoPrograIII.entity.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ventacomida.ProyectoPrograIII.services.ProductoService;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/productos")
+/*@RestController
+@RequestMapping("/api/productos")*/
 public class ProductoController {
-
+/*
     @Autowired
     private ProductoService productoService;
 
@@ -33,7 +33,7 @@ public class ProductoController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Integer id) {
         productoService.eliminar(id);
-    }
+    }*/
 
 
 }

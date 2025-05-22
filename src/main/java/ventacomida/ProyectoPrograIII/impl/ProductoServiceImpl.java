@@ -1,6 +1,6 @@
 package ventacomida.ProyectoPrograIII.impl;
 
-import ventacomida.ProyectoPrograIII.model.Producto;
+import ventacomida.ProyectoPrograIII.entity.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ventacomida.ProyectoPrograIII.repository.ProductoRepository;

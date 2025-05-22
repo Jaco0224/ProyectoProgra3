@@ -1,6 +1,6 @@
 package ventacomida.ProyectoPrograIII.services;
 
-import ventacomida.ProyectoPrograIII.model.Venta;
+import ventacomida.ProyectoPrograIII.entity.Venta;
 
 import java.util.List;
 

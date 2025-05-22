@@ -1,7 +1,7 @@
 package ventacomida.ProyectoPrograIII.impl;
 
 import org.springframework.stereotype.Service;
-import ventacomida.ProyectoPrograIII.model.DetalleVenta;
+import ventacomida.ProyectoPrograIII.entity.DetalleVenta;
 import ventacomida.ProyectoPrograIII.services.DetalleVentaService;
 
 import java.util.List;

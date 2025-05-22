@@ -1,18 +1,18 @@
 package ventacomida.ProyectoPrograIII.controller;
 
 
-import ventacomida.ProyectoPrograIII.model.Venta;
+import ventacomida.ProyectoPrograIII.entity.Venta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ventacomida.ProyectoPrograIII.services.VentaService;
 
 import java.util.List;
 
-@RequestMapping("/api/ventas")
+/*@RequestMapping("/api/ventas")
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*")*/
 public class VentaController {
-
+/*
     @Autowired
     private VentaService ventaService;
 
@@ -34,6 +34,6 @@ public class VentaController {
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable Integer id) {
         ventaService.eliminar(id);
-    }
+    }*/
 
 }
