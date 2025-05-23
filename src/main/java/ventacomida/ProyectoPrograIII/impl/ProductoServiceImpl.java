@@ -9,7 +9,6 @@ import ventacomida.ProyectoPrograIII.services.ProductoService;
 import java.util.List;
 
 @Service
-
 public class ProductoServiceImpl implements ProductoService {
 
     @Autowired
@@ -33,6 +32,12 @@ public class ProductoServiceImpl implements ProductoService {
     @Override
     public void eliminar(Integer id) {
         productoRepository.deleteById(id);
+    }
+    
+      @Override
+    public Producto buscarPorNombre(String nombre) {
+        return productoRepository.findByNombre(nombre)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado: " + nombre));
     }
 }
 

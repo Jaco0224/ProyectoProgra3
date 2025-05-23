@@ -10,6 +10,7 @@ public interface UsuarioService {
     Usuario guardar(Usuario usuario);
     Usuario obtenerPorId(Integer id);
     void eliminar(Integer id);
+    Usuario buscarPorUsuario(String usuario);
     
     
 

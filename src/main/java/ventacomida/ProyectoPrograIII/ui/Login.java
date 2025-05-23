@@ -11,14 +11,21 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import ventacomida.ProyectoPrograIII.entity.Usuario;
+import ventacomida.ProyectoPrograIII.impl.ProductoServiceImpl;
+import ventacomida.ProyectoPrograIII.impl.VentaServiceImpl;
+import ventacomida.ProyectoPrograIII.services.ProductoService;
+import ventacomida.ProyectoPrograIII.services.UsuarioService;
+import ventacomida.ProyectoPrograIII.services.VentaService;
 
 /**
  *
  * @author jc039
  */
 
-@Component
+
 public class Login extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Login.class.getName());
@@ -28,9 +35,20 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     
+    private final UsuarioService usuarioService;
+    private final BCryptPasswordEncoder passwordEncoder;
+    private final ProductoService productoService;
+    private final VentaService ventaService;
+   
     @Autowired
-    private AuthenticationManager authenticationManager;
-    public Login() {
+   
+    public Login(UsuarioService usuarioService, BCryptPasswordEncoder passwordEncoder, ProductoService productoService, VentaService ventaService) {
+        this.usuarioService = usuarioService;
+        this.passwordEncoder = passwordEncoder;
+        this.productoService = productoService;
+        this.ventaService = ventaService;
+
+   
         initComponents();
         setLocationRelativeTo(null);
         
@@ -41,30 +59,31 @@ public class Login extends javax.swing.JFrame {
         autenticarDesdeSwing(usuario, contraseña);
 });
         
+
+        
         
     }
 
-    public boolean autenticarDesdeSwing(String usuario, String contraseña) {
-        try {
-            Authentication auth = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(usuario, contraseña)
-            );
-            SecurityContextHolder.getContext().setAuthentication(auth);
+    public void autenticarDesdeSwing(String usuario, String contraseña) {
+            Usuario usuarioObj = usuarioService.buscarPorUsuario(usuario);
 
-            if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+    if (usuarioObj != null && passwordEncoder.matches(contraseña, usuarioObj.getContraseña())) {
+        JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso");
+
+            String rol = usuarioObj.getRole().toUpperCase(); // normalizar
+
+            if ("ROLE_ADMIN".equals(rol) || "ADMINISTRADOR".equals(rol)) {
                 new VentanaAdmin().setVisible(true);
-            } else if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_VENDEDOR"))) {
-                new VentanaVendedor().setVisible(true);
+            } else if ("ROLE_VENDEDOR".equals(rol) || "VENDEDOR".equals(rol)) {
+                new MenuVendedor(productoService, ventaService, usuarioObj).setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Rol desconocido: " + rol);
             }
+        this.dispose(); // Cierra la ventana Login
 
-            this.dispose(); 
-            //cierra el login
-            return true;
-
-        } catch (AuthenticationException e) {
-            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
-            return false;
-        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
+    }
     }
     
 
@@ -100,6 +119,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(txtpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 253, -1));
 
         btnLogin.setText("Ingresar");
+        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -138,27 +158,10 @@ public class Login extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    
+   
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Login().setVisible(true));
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;

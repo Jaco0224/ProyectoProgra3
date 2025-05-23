@@ -1,11 +1,14 @@
 package ventacomida.ProyectoPrograIII.repository;
 
+import java.util.Optional;
 import ventacomida.ProyectoPrograIII.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     
-    Usuario findByUsuario(String usuario);
+    Optional <Usuario> findByUsuario(String usuario);
+    
+    
     
 }
 

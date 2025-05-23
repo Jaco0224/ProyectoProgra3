@@ -12,4 +12,8 @@ public interface ProductoService {
     Producto obtenerPorId(Integer id);
 
     void eliminar(Integer id);
+    
+     Producto buscarPorNombre(String nombre);
+    
+    
 }

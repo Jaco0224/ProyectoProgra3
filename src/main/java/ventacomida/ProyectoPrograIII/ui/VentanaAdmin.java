@@ -4,13 +4,14 @@
  */
 package ventacomida.ProyectoPrograIII.ui;
 
+import javax.swing.JFrame;
 import org.springframework.stereotype.Component;
 
 /**
  *
  * @author jc039
  */
- @Component
+
 public class VentanaAdmin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaAdmin.class.getName());
@@ -20,6 +21,12 @@ public class VentanaAdmin extends javax.swing.JFrame {
      */
  
     public VentanaAdmin() {
+               setTitle("Administrador");
+        setSize(600, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        
+    
         initComponents();
     }
 
